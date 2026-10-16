@@ -8,10 +8,10 @@
   --bg: #171918;
   --panel: #1e211f;
   --text: #f0f0e9;
-  --muted: #a8ada7;
+  --muted: #b6bcb4;
   --line: #363b35;
   --accent: #c3f36b;
-  --mono: 'Courier New', monospace;
+  --mono: ui-monospace, 'Cascadia Code', Consolas, 'Liberation Mono', monospace;
 }
 
 *, *::before, *::after { box-sizing: border-box; }

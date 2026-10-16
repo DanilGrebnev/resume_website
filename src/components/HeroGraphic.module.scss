@@ -56,7 +56,7 @@ $soft-line: #7d956438;
   justify-content: space-between;
   gap: 12px;
   color: var(--muted);
-  font: 8px var(--mono);
+  font: 11px var(--mono);
   letter-spacing: .04em;
 }
 .topline { top: 17px; }
@@ -65,7 +65,7 @@ $soft-line: #7d956438;
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 7px;
+  font-size: 10px;
   color: #b5c6a0;
 
   i {
@@ -169,7 +169,7 @@ $soft-line: #7d956438;
   padding: 5px 7px;
   background: #171918;
   border: 1px solid #404b3566;
-  font: 8px/1.3 var(--mono);
+  font: 11px/1.4 var(--mono);
   color: #a1b58c;
   white-space: nowrap;
   animation: tagFloat 8s ease-in-out infinite;
@@ -184,7 +184,7 @@ $soft-line: #7d956438;
   flex-direction: column;
   gap: 3px;
   color: #a0ac95;
-  font: 9px/1.5 var(--mono);
+  font: 11px/1.5 var(--mono);
 
   b { color: #b9cf9f; font-weight: 400; }
 }
@@ -209,8 +209,8 @@ $soft-line: #7d956438;
 @media (max-width: 760px) {
   .panel { height: 320px; --scene-size: 228px; }
   .glyph { font-size: 132px; }
-  .coordinate { bottom: 45px; font-size: 8px; }
-  .codeTag { font-size: 7px; }
+  .coordinate { bottom: 45px; font-size: 11px; }
+  .codeTag { font-size: 10px; }
   .tagOne { top: 5%; }
   .tagTwo { bottom: 10%; }
 

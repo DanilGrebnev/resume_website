@@ -75,7 +75,7 @@ const ogImage = p.seo.siteUrl ? new URL('/og.png', p.seo.siteUrl).href : '/og.pn
 
         <section id="contact" class={styles.contact} aria-labelledby="contact-title">
           <div class={styles.sectionHeading} data-reveal><p class={styles.kicker}><span>04 /</span> КОНТАКТЫ</p><span class={styles.contactSpark} aria-hidden="true">✳</span></div>
-          <div class={styles.contactLayout} data-reveal><h2 id="contact-title">Есть идея?<br />Давайте <span>обсудим<span class={styles.contactArrow} aria-hidden="true">↗</span></span></h2><p>Расскажите о вашем проекте,<br />задаче или предложении.<br /><span>Начнём с простого «привет».</span></p></div>
+          <div class={styles.contactLayout} data-reveal><h2 id="contact-title">Есть идея?<br />Давайте <span>обсудим<span class={styles.contactArrow} aria-hidden="true">↗</span></span></h2><p>Расскажите о вашем проекте,<br />{' '}задаче или предложении.<br />{' '}<span>Начнём с простого «привет».</span></p></div>
             <div class={styles.contactLinks}>{p.contacts.map(contact => contact.href ? <a href={contact.href} target={contact.href.startsWith('mailto:') ? undefined : '_blank'} rel="noopener noreferrer"><span>{contact.label}</span><span>{contact.value}</span><span aria-hidden="true">↗</span></a> : <div class={styles.contactPlaceholder}><span>{contact.label}</span><span>{contact.value}</span><span aria-hidden="true">↗</span><span class={styles.srOnly}> — контакт пока не указан</span></div>)}</div>
         </section>
       </main>
