@@ -1,0 +1,27 @@
+---
+import type { Project } from '../data/portfolio';
+import styles from './ProjectCard.module.css';
+import TechBadge from './TechBadge.astro';
+interface Props { project: Project; featured?: boolean }
+const { project, featured = false } = Astro.props;
+---
+<article class:list={[styles.card, { [styles.featured]: featured }]} data-reveal>
+  <div class:list={[styles.art, styles[project.visual]]} aria-hidden="true">
+    <div class={styles.artTop}><span>EXPERIMENT / {project.number}</span><span>↗</span></div>
+    {project.visual === 'orbit' && <div class={styles.orbital}><div></div><div></div><div></div><span>✳</span></div>}
+    {project.visual === 'grid' && <div class={styles.blocks}>{Array.from({ length: 16 }, (_, i) => <span style={`--i:${i}`}></span>)}</div>}
+    {project.visual === 'type' && <div class={styles.typeArt}><span>&lt;</span><span>/</span><span>&gt;</span></div>}
+    <div class={styles.artBottom}><span>{project.title.startsWith('[') ? 'ВИЗУАЛЬНЫЙ ЗАПОЛНИТЕЛЬ' : 'CODE. CRAFT. CHARACTER.'}</span><span>{project.number} / PROJECT</span></div>
+  </div>
+  <div class={styles.body}>
+    <div class={styles.category}><span>{project.number} / {project.category}</span><span>ПРОЕКТ</span></div>
+    <h3>{project.title}</h3>
+    <p class={styles.description}>{project.description}</p>
+    <dl class={styles.details}><div><dt>Моя роль</dt><dd>{project.role}</dd></div><div><dt>Результат</dt><dd>{project.result}</dd></div></dl>
+    <div class={styles.tags}>{project.technologies.length ? project.technologies.map(tech => <TechBadge technology={tech} />) : <span>[Стек проекта]</span>}</div>
+    <div class={styles.links}>
+      {project.href ? <a href={project.href} target="_blank" rel="noopener noreferrer">Смотреть проект <span>↗</span></a> : <span class={styles.placeholder}>[Ссылка на проект] ↗</span>}
+      {project.source && <a href={project.source} target="_blank" rel="noopener noreferrer">Код ↗</a>}
+    </div>
+  </div>
+</article>

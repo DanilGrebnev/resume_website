@@ -1,0 +1,25 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  line-height: 1.6;
+  transition: color .2s ease, border-color .2s ease;
+}
+
+.badge:hover {
+  color: var(--text);
+  border-color: #657455;
+}
+
+.badge > span:last-child { overflow-wrap: anywhere; }
+
+.icon {
+  display: inline-block;
+  flex: 0 0 16px;
+  width: 16px;
+  height: 16px;
+  background-color: var(--accent);
+  -webkit-mask: var(--tech-icon) center / contain no-repeat;
+  mask: var(--tech-icon) center / contain no-repeat;
+}
