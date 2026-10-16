@@ -15,7 +15,9 @@ export interface Project {
   technologies: string[];
   href: string | null;
   source: string | null;
-  visual: 'orbit' | 'grid' | 'type';
+  visual: 'sentx' | 'mybox' | 'iec' | 'sobol' | 'metdent' | 'flet';
+  coverLabel: string;
+  coverCaption: string;
 }
 
 export interface Portfolio {
@@ -31,36 +33,69 @@ export interface Portfolio {
 }
 
 export const portfolio: Portfolio = {
-  name: '[Ваше имя]',
-  specialization: '[Ваша специализация]',
-  positioning: '[Расскажите в одном предложении, какие цифровые продукты вы создаёте и чем помогаете людям и бизнесу.]',
+  name: 'Danil',
+  specialization: 'Fullstack разработка',
+  positioning: 'От первого клика до последнего запроса. Создаю сайты, AI-сервисы и веб-приложения — с продуманным интерфейсом и надёжной логикой внутри.',
   about: [
-    '[Пара слов о вас: что вам интересно в разработке, как вы подходите к работе и какие задачи любите решать.]',
-    '[Добавьте второе предложение о вашем подходе, профессиональных интересах или следующем шаге в карьере.]',
+    'Я Danil, fullstack-разработчик. Соединяю интерфейсы, серверную логику и данные в цельный продукт. Среди моих работ — AI-сервис SentX, frontend для MYBOX и IEC, сайт и Telegram-бот для клуба «Соболь».',
+    'Для меня разработка начинается с вопроса: что человеку нужно сделать и как помочь ему сделать это проще? Поэтому уделяю внимание и понятному интерфейсу, и тому, что происходит за ним: обработке запросов, работе с данными и взаимодействию сервисов.',
   ],
   directions: [
-    { title: '[Направление работы]', description: '[Какие задачи вы решаете и что для вас важно в результате.]' },
-    { title: '[Ваш подход]', description: '[Как вы работаете с задачами, командой и обратной связью.]' },
-    { title: '[Что вам интересно]', description: '[Продукты и идеи, над которыми вы хотели бы работать.]' },
+    { title: 'От интерфейса до API', description: 'Разрабатываю frontend и backend: от первого экрана до серверной логики и базы данных. Связываю части продукта в работающую систему.' },
+    { title: 'Сначала задача, затем код', description: 'Разбираюсь в сценариях использования и выбираю технологии под задачу. Стремлюсь к решениям, которые понятны пользователю и удобны в дальнейшем развитии.' },
+    { title: 'Сервисы, которые помогают', description: 'AI-инструменты, веб-приложения и Telegram-боты. Интересны продукты, которые сокращают путь от намерения к действию: найти ответ, оформить заказ или записаться на игру.' },
   ],
   stack: [
-    { title: 'Frontend', technologies: ['React', 'Next.js', 'Astro', 'TypeScript', 'Motion UI'], placeholder: '[Ваши frontend-технологии]' },
+    { title: 'Frontend', technologies: ['React', 'Next.js', 'Astro', 'TypeScript', 'SCSS Modules', 'Motion UI'], placeholder: '[Ваши frontend-технологии]' },
     { title: 'Backend · JS / TS', technologies: ['Express', 'NestJS'], placeholder: '[Ваши backend-технологии]' },
-    { title: 'Backend · Python', technologies: ['Python', 'asyncio', '[Python-фреймворк — уточнить]'], placeholder: '[Ваши Python-технологии]' },
+    { title: 'Backend · Python', technologies: ['Python', 'FastAPI', 'asyncio'], placeholder: '[Ваши Python-технологии]' },
     { title: 'Базы данных', technologies: ['PostgreSQL', 'MongoDB'], placeholder: '[Ваши базы данных]' },
   ],
   projects: [
-    { number: '01', title: '[Название проекта]', category: '[Тип продукта]', description: '[Опишите задачу проекта: для кого он создан и какую проблему решает.]', role: '[Что вы сделали лично]', result: '[Результат без вымышленных метрик]', technologies: [], href: null, source: null, visual: 'orbit' },
-    { number: '02', title: '[Название проекта]', category: '[Тип продукта]', description: '[Расскажите об идее и ключевой особенности этого проекта.]', role: '[Ваша роль в проекте]', result: '[Что получилось в итоге]', technologies: [], href: null, source: null, visual: 'grid' },
-    { number: '03', title: '[Название проекта]', category: '[Тип продукта]', description: '[Добавьте задачу и детали, которые делают этот проект интересным.]', role: '[Ваш вклад в разработку]', result: '[Результат работы]', technologies: [], href: null, source: null, visual: 'type' },
+    {
+      number: '01', title: 'SentX', category: 'AI · Веб-приложение',
+      description: 'AI-сервис с ассистентом Victoria: общение, поиск информации, работа с документами и генерация визуального контента в одном пространстве.',
+      role: 'Полная разработка frontend и backend', result: 'Веб-интерфейс AI-ассистента с чатом и инструментами для работы с контентом.',
+      technologies: ['Next.js', 'React', 'TypeScript', 'SCSS Modules', 'Zustand', 'Axios', 'PostgreSQL', 'FastAPI', 'Python'], href: 'https://sentx.ai/', source: null, visual: 'sentx', coverLabel: 'SentX', coverCaption: 'Идеи обретают интеллект.',
+    },
+    {
+      number: '02', title: 'MYBOX', category: 'E-commerce · Доставка еды',
+      description: 'Сайт сети ресторанов японской и паназиатской кухни. Каталог блюд, выбор города и оформление заказов на доставку и самовывоз.',
+      role: 'Frontend-разработка', result: 'Онлайн-витрина меню и сервис заказа еды в Волгограде.',
+      technologies: ['Next.js', 'TypeScript', 'SCSS Modules'], href: 'https://mybox.ru/volgograd', source: null, visual: 'mybox', coverLabel: 'MYBOX', coverCaption: 'Большой вкус. В одном боксе.',
+    },
+    {
+      number: '03', title: 'Центр Международного Обмена', category: 'Образование · Международные программы',
+      description: 'Сайт IEC о работе, учёбе и путешествиях за рубежом. Программы международного обмена, стажировки и Work and Travel.',
+      role: 'Frontend-разработка', result: 'Каталог программ по направлениям и странам с возможностью записаться на консультацию.',
+      technologies: ['WordPress', 'TypeScript', 'SCSS', 'jQuery', 'GSAP', 'Swiper', 'Inputmask'], href: 'https://iec.ru/ru/', source: null, visual: 'iec', coverLabel: 'IEC', coverCaption: 'Мир становится ближе.',
+    },
+    {
+      number: '04', title: 'Соболь', category: 'Развлечения · Квесты',
+      description: 'Сайт творческо-игрового клуба в Волгограде. Иммерсивные квесты и перформансы с актёрами, атмосфера историй и выбор своей игры.',
+      role: 'Разработка сайта и Telegram-бота для записи на квесты', result: 'Презентация клуба и каталог игр с записью на квесты через Telegram-бота.',
+      technologies: ['Astro', 'React', 'TypeScript', 'SCSS Modules', 'FastAPI', 'Python'], href: 'https://sobolquest.ru/', source: null, visual: 'sobol', coverLabel: 'Соболь', coverCaption: 'Стань частью истории.',
+    },
+    {
+      number: '05', title: 'Металлокерамика', category: 'Медицина · Сайт клиники',
+      description: 'Сайт стоматологической клиники в Волгограде. Информация о лечении, имплантации, услугах и специалистах для знакомства с клиникой.',
+      role: 'Fullstack-разработка: сайт полностью', result: 'Сайт с услугами стоматологии и записью на консультацию.',
+      technologies: ['Astro', 'TypeScript', 'SCSS Modules'], href: 'https://met-dent34.ru/', source: null, visual: 'metdent', coverLabel: 'Металло­керамика', coverCaption: 'Забота начинается с доверия.',
+    },
+    {
+      number: '06', title: 'Флет', category: 'B2B · Платформа для бизнеса',
+      description: 'Платформа для онлайн-продаж и работы с клиентами: сайты, приложения, управление заказами, программы лояльности и коммуникации.',
+      role: '[Уточните вашу роль]', result: 'Презентация возможностей платформы, сценариев работы и тарифов для бизнеса.',
+      technologies: ['React', 'TypeScript', 'SCSS Modules'], href: 'https://flet.su/', source: null, visual: 'flet', coverLabel: 'флет', coverCaption: 'Бизнес. В движении.',
+    },
   ],
   contacts: [
-    { label: 'Telegram', value: '[@ваш_ник]', href: null },
-    { label: 'GitHub', value: '[ваш_профиль]', href: null },
-    { label: 'Email', value: '[ваша@почта.ru]', href: null },
+    { label: 'Telegram', value: '@Grebnev_D', href: 'https://t.me/Grebnev_D' },
+    { label: 'GitHub', value: 'DanilGrebnev', href: 'https://github.com/DanilGrebnev' },
+    { label: 'Email', value: 'grebnevdanil60@gmail.com', href: 'mailto:grebnevdanil60@gmail.com' },
   ],
   seo: {
-    title: '[Ваше имя] — портфолио разработчика',
+    title: 'Danil — Fullstack разработка',
     description: 'Портфолио разработчика: подход к работе, технологии, избранные проекты и контакты.',
     siteUrl: null,
   },

@@ -5,22 +5,28 @@ import TechBadge from './TechBadge.astro';
 interface Props { project: Project; featured?: boolean }
 const { project, featured = false } = Astro.props;
 ---
-<article class:list={[styles.card, { [styles.featured]: featured }]} data-reveal>
+<article class:list={[styles.card, { [styles.featured]: featured, [styles.reverse]: featured && project.visual === 'flet' }]} data-reveal>
   <div class:list={[styles.art, styles[project.visual]]} aria-hidden="true">
-    <div class={styles.artTop}><span>EXPERIMENT / {project.number}</span><span>↗</span></div>
-    {project.visual === 'orbit' && <div class={styles.orbital}><div></div><div></div><div></div><span>✳</span></div>}
-    {project.visual === 'grid' && <div class={styles.blocks}>{Array.from({ length: 16 }, (_, i) => <span style={`--i:${i}`}></span>)}</div>}
-    {project.visual === 'type' && <div class={styles.typeArt}><span>&lt;</span><span>/</span><span>&gt;</span></div>}
-    <div class={styles.artBottom}><span>{project.title.startsWith('[') ? 'ВИЗУАЛЬНЫЙ ЗАПОЛНИТЕЛЬ' : 'CODE. CRAFT. CHARACTER.'}</span><span>{project.number} / PROJECT</span></div>
+    <div class={styles.artTop}><span>{project.href ? new URL(project.href).hostname : 'SELECTED WORK'}</span><span>{project.number} ↗</span></div>
+    <div class={styles.artMotif}>
+      {project.visual === 'sentx' && <div class={styles.orbital}><span></span><span></span><span></span><b>✳</b></div>}
+      {project.visual === 'mybox' && <div class={styles.boxes}><span></span><span></span><span></span></div>}
+      {project.visual === 'iec' && <div class={styles.globe}><span></span><span></span><span></span><b>↗</b></div>}
+      {project.visual === 'sobol' && <div class={styles.door}><span></span><b>✦</b></div>}
+      {project.visual === 'metdent' && <svg class={styles.tooth} viewBox="0 0 100 120" fill="none"><path d="M50 20C27 3 5 15 12 44c3 14 9 21 11 39 3 25 12 27 18 3 5-18 13-18 18 0 6 24 15 22 18-3 2-18 8-25 11-39C95 15 73 3 50 20Z" stroke="currentColor" stroke-width="2"/><path d="M32 29c8-2 13 5 24 4M75 54l12-12m-6 0h6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>}
+      {project.visual === 'flet' && <div class={styles.growth}><span></span><span></span><span></span><span></span><b>↗</b></div>}
+    </div>
+    <div class={styles.coverText}><span class={styles.wordmark}>{project.coverLabel}</span><span class={styles.coverCaption}>{project.coverCaption}</span></div>
+    <div class={styles.artBottom}><span>ГРАФИЧЕСКАЯ ОБЛОЖКА</span><span>SELECTED / {project.number}</span></div>
   </div>
   <div class={styles.body}>
     <div class={styles.category}><span>{project.number} / {project.category}</span><span>ПРОЕКТ</span></div>
-    <h3>{project.title}</h3>
+    <h3>{project.href ? <a href={project.href} target="_blank" rel="noopener noreferrer">{project.title}<span class={styles.titleArrow} aria-hidden="true">↗</span></a> : project.title}</h3>
     <p class={styles.description}>{project.description}</p>
-    <dl class={styles.details}><div><dt>Моя роль</dt><dd>{project.role}</dd></div><div><dt>Результат</dt><dd>{project.result}</dd></div></dl>
-    <div class={styles.tags}>{project.technologies.length ? project.technologies.map(tech => <TechBadge technology={tech} />) : <span>[Стек проекта]</span>}</div>
+    <p class={styles.result}>{project.result}</p>
+    <details class={styles.details} open={project.technologies.length > 0}><summary>Роль и технологии <span aria-hidden="true">+</span></summary><dl><div><dt>Моя роль</dt><dd>{project.role}</dd></div></dl><div class={styles.tags}>{project.technologies.length ? project.technologies.map(tech => <TechBadge technology={tech} />) : <span>[Стек проекта — уточнить]</span>}</div></details>
     <div class={styles.links}>
-      {project.href ? <a href={project.href} target="_blank" rel="noopener noreferrer">Смотреть проект <span>↗</span></a> : <span class={styles.placeholder}>[Ссылка на проект] ↗</span>}
+      {project.href ? <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Смотреть проект ${project.title}`}>Смотреть проект <span aria-hidden="true">↗</span></a> : <span class={styles.placeholder}>[Ссылка на проект] ↗</span>}
       {project.source && <a href={project.source} target="_blank" rel="noopener noreferrer">Код ↗</a>}
     </div>
   </div>
