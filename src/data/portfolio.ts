@@ -1,3 +1,5 @@
+import type { Locale } from '../lib/locale';
+
 export interface Contact {
   label: string;
   value: string;
@@ -98,5 +100,120 @@ export const portfolio: Portfolio = {
     title: 'Danil — Fullstack разработка',
     description: 'Портфолио разработчика: подход к работе, технологии, избранные проекты и контакты.',
     siteUrl: null,
+  },
+};
+
+type ProjectTranslation = Pick<Project, 'title' | 'category' | 'description' | 'role' | 'result' | 'coverLabel' | 'coverCaption'>;
+
+const englishProjects: Record<Project['visual'], ProjectTranslation> = {
+  sentx: {
+    title: 'SentX', category: 'AI · Web application',
+    description: 'An AI service featuring Victoria: conversations, research, document tools and visual content generation in one workspace.',
+    role: 'Complete frontend and backend development',
+    result: 'An AI assistant web app with chat and tools for working with content.',
+    coverLabel: 'SentX', coverCaption: 'Where ideas meet intelligence.',
+  },
+  mybox: {
+    title: 'MYBOX', category: 'E-commerce · Food delivery',
+    description: 'A website for a Japanese and Pan-Asian restaurant chain, with a food catalog, city selection, delivery and pickup orders.',
+    role: 'Frontend development', result: 'An online menu and food ordering service for Volgograd.',
+    coverLabel: 'MYBOX', coverCaption: 'Big flavor. One box.',
+  },
+  iec: {
+    title: 'International Exchange Center', category: 'Education · Exchange programs',
+    description: 'The IEC website brings together work, study and travel opportunities abroad, including international exchanges, internships and Work and Travel.',
+    role: 'Frontend development', result: 'A program catalog organized by destination and country, with consultation requests.',
+    coverLabel: 'IEC', coverCaption: 'A world of possibilities.',
+  },
+  sobol: {
+    title: 'Sobol', category: 'Entertainment · Escape rooms',
+    description: 'A website for a creative gaming club in Volgograd, featuring immersive escape rooms, live actors and stories you can step into.',
+    role: 'Website and Telegram booking bot development', result: 'A club website and game catalog with escape room bookings through a Telegram bot.',
+    coverLabel: 'Sobol', coverCaption: 'Become part of the story.',
+  },
+  metdent: {
+    title: 'Metallokeramika', category: 'Healthcare · Clinic website',
+    description: 'A dental clinic website in Volgograd, introducing treatments, implants, services and specialists to prospective patients.',
+    role: 'Fullstack development of the entire website', result: 'A dental services website with consultation booking.',
+    coverLabel: 'Metallo­keramika', coverCaption: 'Care starts with trust.',
+  },
+  flet: {
+    title: 'Flet', category: 'B2B · Business platform',
+    description: 'A platform for online sales and customer relationships: websites, apps, order management, loyalty programs and communication tools.',
+    role: '[Role to be added]', result: 'A product website explaining the platform, business use cases and pricing.',
+    coverLabel: 'flet', coverCaption: 'Business. Moving forward.',
+  },
+};
+
+const englishPortfolio: Portfolio = {
+  ...portfolio,
+  specialization: 'Fullstack Development',
+  positioning: 'From the first click to the final request. I build websites, AI services and web apps with thoughtful interfaces and reliable logic behind them.',
+  about: [
+    'I’m Danil, a fullstack developer. I bring interfaces, server logic and data together into complete products. My work includes the SentX AI service, frontend development for MYBOX and IEC, and a website and Telegram bot for the Sobol club.',
+    'For me, development starts with a question: what does someone need to do, and how can I make it easier? That means paying attention to both a clear interface and the systems behind it: request handling, data and communication between services.',
+  ],
+  directions: [
+    { title: 'From interface to API', description: 'I build frontend and backend, from the first screen to server logic and databases, connecting the pieces into a working product.' },
+    { title: 'Understand first. Then build.', description: 'I explore how a product will be used and choose tools to fit the task, aiming for solutions that are clear to users and easy to evolve.' },
+    { title: 'Software that helps', description: 'AI tools, web apps and Telegram bots. I’m interested in products that shorten the path from intention to action: finding an answer, placing an order or booking a game.' },
+  ],
+  stack: portfolio.stack.map((group, index) => ({
+    ...group,
+    title: ['Frontend', 'Backend · JS / TS', 'Backend · Python', 'Databases'][index] ?? group.title,
+    placeholder: '[Technologies to be added]',
+  })),
+  projects: portfolio.projects.map(project => ({ ...project, ...englishProjects[project.visual] })),
+  seo: {
+    ...portfolio.seo,
+    title: 'Danil — Fullstack Developer',
+    description: 'Danil’s developer portfolio: thoughtful interfaces, reliable backend systems, AI services, selected projects and contact details.',
+  },
+};
+
+export const portfolios: Record<Locale, Portfolio> = { ru: portfolio, en: englishPortfolio };
+
+const russianInterface = {
+  skip: 'Перейти к содержимому', home: 'На главную', navigation: 'Основная навигация',
+  aboutNav: 'Обо мне', stackNav: 'Стек', projectsNav: 'Проекты', contactNav: 'На связи',
+  languages: 'Язык сайта', russian: 'Читать на русском', english: 'Read in English',
+  eyebrow: 'ПОРТФОЛИО РАЗРАБОТЧИКА', hello: 'Привет, я', projectsButton: 'Мои проекты', contactButton: 'Связаться',
+  heroBottom: 'ОТ ИДЕИ — К РАБОТАЮЩЕМУ ПРОДУКТУ', scroll: 'Листайте, здесь больше',
+  aboutLabel: 'ОБО МНЕ', aboutNote: 'ЧЕЛОВЕК ЗА КОДОМ', aboutTitle1: 'Хороший код.', aboutTitle2: 'Осмысленный', aboutTitle3: 'результат.',
+  stackLabel: 'ТЕХНОЛОГИИ', stackNote: 'МОЙ РАБОЧИЙ НАБОР', stackTitle1: 'Инструменты.', stackTitle2: 'Под задачу.',
+  stackIntro1: 'Технологии, с которыми я работаю.', stackIntro2: 'Без процентов и условных рейтингов.',
+  projectsLabel: 'ИЗБРАННЫЕ ПРОЕКТЫ', projectsNote: 'ИДЕИ В ДЕЙСТВИИ', projectsTitle1: 'Меньше слов.', projectsTitle2: 'Больше дела.',
+  projectsIntro: 'Задачи, решения и детали работы.', projectPlaceholder: 'Сейчас здесь заполнители ваших проектов.',
+  contactLabel: 'КОНТАКТЫ', contactTitle1: 'Есть идея?', contactTitle2: 'Давайте', contactTitle3: 'обсудим',
+  contactIntro1: 'Расскажите о вашем проекте,', contactIntro2: 'задаче или предложении.', contactIntro3: 'Начнём с простого «привет».',
+  contactMissing: ' — контакт пока не указан', footer: 'Собрано с вниманием к деталям.', backTop: 'Наверх',
+  cover: 'ГРАФИЧЕСКАЯ ОБЛОЖКА', project: 'ПРОЕКТ', roleTechnologies: 'Роль и технологии', myRole: 'Моя роль',
+  stackMissing: '[Стек проекта — уточнить]', viewProject: 'Смотреть проект', linkMissing: '[Ссылка на проект]', source: 'Код',
+  graphicEnvironment: 'СРЕДА РАЗРАБОТКИ', graphicOnline: 'СИСТЕМА АКТИВНА', graphicIdeas: 'идеи', graphicCode: 'код', graphicPossibilities: 'возможности',
+  graphicFooter: 'КОД. МАСТЕРСТВО. ХАРАКТЕР.', ogAlt: 'Портфолио разработчика Danil',
+};
+
+export type InterfaceCopy = typeof russianInterface;
+
+export const interfaceCopy: Record<Locale, InterfaceCopy> = {
+  ru: russianInterface,
+  en: {
+    skip: 'Skip to content', home: 'Back to home', navigation: 'Main navigation',
+    aboutNav: 'About', stackNav: 'Stack', projectsNav: 'Projects', contactNav: 'Get in touch',
+    languages: 'Website language', russian: 'Читать на русском', english: 'Read in English',
+    eyebrow: 'DEVELOPER PORTFOLIO', hello: 'Hi, I’m', projectsButton: 'View projects', contactButton: 'Let’s talk',
+    heroBottom: 'FROM AN IDEA TO A WORKING PRODUCT', scroll: 'Scroll to explore',
+    aboutLabel: 'ABOUT ME', aboutNote: 'THE PERSON BEHIND THE CODE', aboutTitle1: 'Good code.', aboutTitle2: 'Meaningful', aboutTitle3: 'results.',
+    stackLabel: 'TECHNOLOGIES', stackNote: 'MY TOOLKIT', stackTitle1: 'The right tools.', stackTitle2: 'For the task.',
+    stackIntro1: 'Technologies I work with.', stackIntro2: 'No percentages. No arbitrary ratings.',
+    projectsLabel: 'SELECTED PROJECTS', projectsNote: 'IDEAS IN ACTION', projectsTitle1: 'Less talk.', projectsTitle2: 'More building.',
+    projectsIntro: 'The challenges, solutions and details.', projectPlaceholder: 'Placeholders for your projects appear here.',
+    contactLabel: 'CONTACT', contactTitle1: 'Have an idea?', contactTitle2: 'Let’s', contactTitle3: 'talk',
+    contactIntro1: 'Tell me about your project,', contactIntro2: 'challenge or opportunity.', contactIntro3: 'It starts with a simple hello.',
+    contactMissing: ' — contact not added yet', footer: 'Built with attention to detail.', backTop: 'Back to top',
+    cover: 'PROJECT ARTWORK', project: 'PROJECT', roleTechnologies: 'Role & technologies', myRole: 'My role',
+    stackMissing: '[Project stack to be added]', viewProject: 'View project', linkMissing: '[Project link]', source: 'Source',
+    graphicEnvironment: 'DEVELOPER’S ENVIRONMENT', graphicOnline: 'SYSTEM ONLINE', graphicIdeas: 'ideas', graphicCode: 'code', graphicPossibilities: 'possibilities',
+    graphicFooter: 'CODE. CRAFT. CHARACTER.', ogAlt: 'Danil’s developer portfolio',
   },
 };

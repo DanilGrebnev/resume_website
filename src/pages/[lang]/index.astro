@@ -1,0 +1,11 @@
+---
+import PortfolioPage from '../../layouts/PortfolioPage.astro';
+import type { Locale } from '../../lib/locale';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'ru' }, props: { locale: 'ru' } }, { params: { lang: 'en' }, props: { locale: 'en' } }];
+}
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+---
+<PortfolioPage locale={locale} />

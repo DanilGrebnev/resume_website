@@ -1,11 +1,15 @@
 ---
 import styles from './HeroGraphic.module.scss';
+import { interfaceCopy } from '../data/portfolio';
+import type { Locale } from '../lib/locale';
+interface Props { locale: Locale }
+const t = interfaceCopy[Astro.props.locale];
 ---
 <div class={styles.panel} data-hero-graphic data-animating="false">
   <div class={styles.artwork} aria-hidden="true">
     <div class={styles.grid}></div>
     <div class={styles.scanLine}></div>
-    <div class={styles.topline}><span>DEVELOPER'S ENVIRONMENT</span><span class={styles.status}><i></i> SYSTEM ONLINE</span></div>
+    <div class={styles.topline}><span>{t.graphicEnvironment}</span><span class={styles.status}><i></i> {t.graphicOnline}</span></div>
     <span class={styles.crossTop}>+</span><span class={styles.crossBottom}>+</span>
 
     <div class={styles.stage}>
@@ -20,8 +24,8 @@ import styles from './HeroGraphic.module.scss';
       <span class:list={[styles.codeTag, styles.tagTwo]}>await build(idea)</span>
     </div>
 
-    <div class={styles.coordinate}><span><b>x:</b> ideas</span><span><b>y:</b> code</span><span><b>z:</b> possibilities</span></div>
-    <div class={styles.footline}><span>CODE. CRAFT. CHARACTER.</span></div>
+    <div class={styles.coordinate}><span><b>x:</b> {t.graphicIdeas}</span><span><b>y:</b> {t.graphicCode}</span><span><b>z:</b> {t.graphicPossibilities}</span></div>
+    <div class={styles.footline}><span>{t.graphicFooter}</span></div>
   </div>
 </div>
 

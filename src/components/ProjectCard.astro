@@ -1,9 +1,12 @@
 ---
 import type { Project } from '../data/portfolio';
+import { interfaceCopy } from '../data/portfolio';
+import type { Locale } from '../lib/locale';
 import styles from './ProjectCard.module.scss';
 import TechBadge from './TechBadge.astro';
-interface Props { project: Project; featured?: boolean }
-const { project, featured = false } = Astro.props;
+interface Props { project: Project; featured?: boolean; locale: Locale }
+const { project, featured = false, locale } = Astro.props;
+const t = interfaceCopy[locale];
 ---
 <article class:list={[styles.card, { [styles.featured]: featured, [styles.reverse]: featured && project.visual === 'flet' }]} data-reveal>
   <div class:list={[styles.art, styles[project.visual]]} aria-hidden="true">
@@ -17,17 +20,17 @@ const { project, featured = false } = Astro.props;
       {project.visual === 'flet' && <div class={styles.growth}><span></span><span></span><span></span><span></span><b>↗</b></div>}
     </div>
     <div class={styles.coverText}><span class={styles.wordmark}>{project.coverLabel}</span><span class={styles.coverCaption}>{project.coverCaption}</span></div>
-    <div class={styles.artBottom}><span>ГРАФИЧЕСКАЯ ОБЛОЖКА</span><span>SELECTED / {project.number}</span></div>
+    <div class={styles.artBottom}><span>{t.cover}</span><span>SELECTED / {project.number}</span></div>
   </div>
   <div class={styles.body}>
-    <div class={styles.category}><span>{project.number} / {project.category}</span><span>ПРОЕКТ</span></div>
+    <div class={styles.category}><span>{project.number} / {project.category}</span><span>{t.project}</span></div>
     <h3>{project.href ? <a href={project.href} target="_blank" rel="noopener noreferrer">{project.title}<span class={styles.titleArrow} aria-hidden="true">↗</span></a> : project.title}</h3>
     <p class={styles.description}>{project.description}</p>
     <p class={styles.result}>{project.result}</p>
-    <details class={styles.details} open={project.technologies.length > 0}><summary>Роль и технологии <span aria-hidden="true">+</span></summary><dl><div><dt>Моя роль</dt><dd>{project.role}</dd></div></dl><div class={styles.tags}>{project.technologies.length ? project.technologies.map(tech => <TechBadge technology={tech} />) : <span>[Стек проекта — уточнить]</span>}</div></details>
+    <details class={styles.details} open={project.technologies.length > 0}><summary>{t.roleTechnologies} <span aria-hidden="true">+</span></summary><dl><div><dt>{t.myRole}</dt><dd>{project.role}</dd></div></dl><div class={styles.tags}>{project.technologies.length ? project.technologies.map(tech => <TechBadge technology={tech} />) : <span>{t.stackMissing}</span>}</div></details>
     <div class={styles.links}>
-      {project.href ? <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Смотреть проект ${project.title}`}>Смотреть проект <span aria-hidden="true">↗</span></a> : <span class={styles.placeholder}>[Ссылка на проект] ↗</span>}
-      {project.source && <a href={project.source} target="_blank" rel="noopener noreferrer">Код ↗</a>}
+      {project.href ? <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`${t.viewProject} ${project.title}`}>{t.viewProject} <span aria-hidden="true">↗</span></a> : <span class={styles.placeholder}>{t.linkMissing} ↗</span>}
+      {project.source && <a href={project.source} target="_blank" rel="noopener noreferrer">{t.source} ↗</a>}
     </div>
   </div>
 </article>
