@@ -2,8 +2,9 @@
 import { portfolio as p } from '../data/portfolio';
 import ProjectCard from '../components/ProjectCard.astro';
 import TechBadge from '../components/TechBadge.astro';
-import styles from '../styles/Home.module.css';
-import '../styles/global.css';
+import HeroGraphic from '../components/HeroGraphic.astro';
+import styles from '../styles/Home.module.scss';
+import '../styles/global.scss';
 const year = new Date().getFullYear();
 const canonical = p.seo.siteUrl ? new URL('/', p.seo.siteUrl).href : null;
 const ogImage = p.seo.siteUrl ? new URL('/og.png', p.seo.siteUrl).href : '/og.png';
@@ -46,13 +47,7 @@ const ogImage = p.seo.siteUrl ? new URL('/og.png', p.seo.siteUrl).href : '/og.pn
               <p class={styles.positioning}>{p.positioning}</p>
               <div class={styles.heroActions}><a class={styles.primary} href="#projects">Мои проекты <span>↗</span></a><a class={styles.secondary} href="#contact">Связаться <span>↗</span></a></div>
             </div>
-            <div class={styles.heroGraphic} aria-hidden="true">
-              <div class={styles.graphicLabel}><span>DEVELOPER'S ENVIRONMENT</span><span>●</span></div>
-              <div class={styles.crossTop}>+</div><div class={styles.crossBottom}>+</div>
-              <div class={styles.glyph}><span>&lt;</span><span>/</span><span>&gt;</span></div>
-              <div class={styles.coordinate}>x: ideas<br />y: code<br />z: possibilities</div>
-              <div class={styles.graphicFoot}><span>CODE. CRAFT. CHARACTER.</span><span>01 / ∞</span></div>
-            </div>
+            <HeroGraphic />
           </div>
           <div class={styles.heroBottom}><span>ОТ ИДЕИ — К РАБОТАЮЩЕМУ ПРОДУКТУ</span><a href="#about">Листайте, здесь больше <span>↓</span></a></div>
         </section>

@@ -1,0 +1,74 @@
+---
+import styles from './HeroGraphic.module.scss';
+---
+<div class={styles.panel} data-hero-graphic data-animating="false">
+  <div class={styles.artwork} aria-hidden="true">
+    <div class={styles.grid}></div>
+    <div class={styles.scanLine}></div>
+    <div class={styles.topline}><span>DEVELOPER'S ENVIRONMENT</span><span class={styles.status}><i></i> SYSTEM ONLINE</span></div>
+    <span class={styles.crossTop}>+</span><span class={styles.crossBottom}>+</span>
+
+    <div class={styles.stage}>
+      <div class={styles.scene}>
+        <div class={styles.outerRing}><span></span><span></span></div>
+        <div class:list={[styles.orbitPlane, styles.planeOne]}><div class={styles.orbitRotor}><i></i></div></div>
+        <div class:list={[styles.orbitPlane, styles.planeTwo]}><div class={styles.orbitRotor}><i></i></div></div>
+        <div class={styles.orbitCore}></div>
+        <div class={styles.glyphFloat}><div class={styles.glyph}><span>&lt;</span><span>/</span><span>&gt;</span></div></div>
+      </div>
+      <span class:list={[styles.codeTag, styles.tagOne]}>const idea = &#123;&#125;</span>
+      <span class:list={[styles.codeTag, styles.tagTwo]}>await build(idea)</span>
+    </div>
+
+    <div class={styles.coordinate}><span><b>x:</b> ideas</span><span><b>y:</b> code</span><span><b>z:</b> possibilities</span></div>
+    <div class={styles.footline}><span>CODE. CRAFT. CHARACTER.</span></div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-hero-graphic]').forEach(panel => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    let inView = true;
+    let frame = 0;
+
+    const resetTilt = () => {
+      cancelAnimationFrame(frame);
+      panel.style.setProperty('--tilt-x', '0deg');
+      panel.style.setProperty('--tilt-y', '0deg');
+      panel.style.setProperty('--shift-x', '0px');
+      panel.style.setProperty('--shift-y', '0px');
+    };
+    const update = () => {
+      const running = inView && !document.hidden && !reducedMotion.matches;
+      panel.dataset.animating = String(running);
+      if (!running) resetTilt();
+    };
+    panel.addEventListener('pointermove', event => {
+      if (panel.dataset.animating !== 'true' || !finePointer.matches) return;
+      const bounds = panel.getBoundingClientRect();
+      const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+      const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        panel.style.setProperty('--tilt-x', `${-y * 10}deg`);
+        panel.style.setProperty('--tilt-y', `${x * 12}deg`);
+        panel.style.setProperty('--shift-x', `${x * 8}px`);
+        panel.style.setProperty('--shift-y', `${y * 8}px`);
+      });
+    });
+    panel.addEventListener('pointerleave', resetTilt);
+    panel.addEventListener('pointercancel', resetTilt);
+    reducedMotion.addEventListener('change', update);
+    finePointer.addEventListener('change', resetTilt);
+    document.addEventListener('visibilitychange', update);
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        inView = entries.some(entry => entry.isIntersecting);
+        update();
+      }, { threshold: 0 });
+      observer.observe(panel);
+    }
+    update();
+  });
+</script>
